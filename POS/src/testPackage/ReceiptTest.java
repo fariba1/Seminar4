@@ -1,12 +1,11 @@
 package testPackage;
 
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import se.kth.iv1500.POS.model.Amount;
 import java.util.List;
-import java.util.function.BooleanSupplier;
-
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +19,7 @@ public class ReceiptTest {
 	Receipt receipt;
 	
 	
-	@Before
+	@BeforeEach
 	public void before() {
 		Amount amount = new Amount(11,"KR");
 		List<ItemDTO> itemInfo = new ArrayList();

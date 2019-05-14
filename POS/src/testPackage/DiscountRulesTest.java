@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1500.POS.DTOs.*;
 import se.kth.iv1500.POS.dbHandler.*;
 import se.kth.iv1500.POS.model.Amount;
+import se.kth.iv1500.POS.model.AmountBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import static junit.framework.Assert.assertTrue;
 
 
  class DiscountRulesTest {
@@ -15,7 +17,7 @@ import java.util.List;
 
 	 @Test
 	 void testDiscountRateMember() {
-		 Amount runningtotal =  new Amount.AmountBuilder()
+		 Amount runningtotal =  new AmountBuilder()
 				 .withAmount(200)
 				 .withCurrency("kr").build();
 		 Amount MILKPRICE = new Amount (10,"kr");

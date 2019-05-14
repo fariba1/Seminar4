@@ -1,31 +1,34 @@
 package testPackage;
 
-import static org.junit.Assert.*;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import se.kth.iv1500.POS.model.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.List;
-import org.junit.*;
 
 import se.kth.iv1500.POS.DTOs.*;
 import se.kth.iv1500.POS.model.Amount;
 import se.kth.iv1500.POS.model.exceptions.ItemAlreadyAddedException;
 import se.kth.iv1500.POS.dbHandler.*;
 
+import static junit.framework.Assert.assertTrue;
+
 public class PrinterTest {
    private ByteArrayOutputStream outContent;
    private PrintStream originalSysOut;
 
-   @Before
+   @BeforeEach
    public void setUpStreams() {
       originalSysOut = System.out;
       outContent = new ByteArrayOutputStream();
       System.setOut(new PrintStream(outContent));
    }
 
-   @After
+   @AfterEach
    public void cleanUpStreams() {
       outContent = null;
       System.setOut(originalSysOut);
