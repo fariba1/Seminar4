@@ -1,7 +1,6 @@
 package se.kth.iv1500.POS.model;
 import se.kth.iv1500.POS.DTOs.*;
 import se.kth.iv1500.POS.dbHandler.*;
-import se.kth.iv1500.POS.model.Amount;
 import se.kth.iv1500.POS.model.exceptions.ItemAlreadyAddedException;
 
 import java.util.ArrayList;
@@ -23,7 +22,6 @@ public class Sale {
 	/**
 	 * adds an new item to the current sale, updates the running total including the VAT
 	 * @param itemInfo an instance of <code>ItemDTO</code> that contains information about an item
-	 * @param quantity the number of items to be added
 	 * @return an instance of <code>SaleDTO</code> that contains information about current sale
 	 * @throws ItemAlreadyAddedException 
 	 */
@@ -33,11 +31,7 @@ public class Sale {
 			this.itemsInCurrentSale.add(itemInfo);
 			int quantity = itemInfo.getItemQuantity();
 			updateRunningTotal(itemInfo, quantity);
-			saleInfo = new SaleDTO(
-					this.runningTotal, 
-					this.itemsInCurrentSale, 
-					this.change, 
-					this.totalPriceAfterDiscount);
+			saleInfo = new SaleDTO.Builder().setRunningTotal(this.runningTotal).setItemInfo(this.itemsInCurrentSale).setChange(this.change).setTotalPriceAfterDiscount(this.totalPriceAfterDiscount).createSaleDTO();
 			return saleInfo;
 		}else {
 			throw new ItemAlreadyAddedException("Item "+
@@ -101,7 +95,7 @@ public class Sale {
 	public Amount countPayment(Amount amountPaid) {
 		int amountInChange = amountPaid.amountSubtraction(this.totalPriceAfterDiscount);
 		change = new Amount(amountInChange, "kr");
-		saleInfo = new SaleDTO(this.runningTotal, this.itemsInCurrentSale, this.change, this.totalPriceAfterDiscount);
+		saleInfo = new SaleDTO.Builder().setRunningTotal(this.runningTotal).setItemInfo(this.itemsInCurrentSale).setChange(this.change).setTotalPriceAfterDiscount(this.totalPriceAfterDiscount).createSaleDTO();
 		return change;
 	}
 	

@@ -21,17 +21,17 @@ public class SaleDTO {
 	 * @param  runningTotal     total price after scanning each item
 	 * @param  itemInfo         an instance of itemDTO which is a place holder for information about an item      	  
 	 */
-	public SaleDTO(
+	private SaleDTO(
 			Amount runningTotal,
-			List <ItemDTO> itemInfo, 
-			Amount change, 
+			List<ItemDTO> itemInfo,
+			Amount change,
 			Amount totalPriceAfterDiscount) {
 		this.runningTotal = runningTotal;
 		this.itemsInCurrentSale = itemInfo;
 		this.change = change;
 		this.totalPriceAfterDiscount = totalPriceAfterDiscount;
 	}
-	
+
 	/**
 	 * returns the running total 
 	 *@return the running total after each sale  
@@ -55,5 +55,37 @@ public class SaleDTO {
 	
 	public Amount getTotalPriceAfterDiscount() {
 		return this.totalPriceAfterDiscount;
+	}
+
+
+	public static class Builder {
+		private Amount runningTotal;
+		private List<ItemDTO> itemInfo;
+		private Amount change;
+		private Amount totalPriceAfterDiscount;
+
+		public Builder setRunningTotal(Amount runningTotal) {
+			this.runningTotal = runningTotal;
+			return this;
+		}
+
+		public Builder setItemInfo(List<ItemDTO> itemInfo) {
+			this.itemInfo = itemInfo;
+			return this;
+		}
+
+		public Builder setChange(Amount change) {
+			this.change = change;
+			return this;
+		}
+
+		public Builder setTotalPriceAfterDiscount(Amount totalPriceAfterDiscount) {
+			this.totalPriceAfterDiscount = totalPriceAfterDiscount;
+			return this;
+		}
+
+		public SaleDTO createSaleDTO() {
+			return new SaleDTO(runningTotal, itemInfo, change, totalPriceAfterDiscount);
+		}
 	}
 }

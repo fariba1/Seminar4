@@ -1,11 +1,10 @@
 package testPackage;
 
-import se.kth.iv1500.POS.model.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static junit.framework.Assert.assertTrue;
-
 import org.junit.jupiter.api.Test;
+import se.kth.iv1500.POS.model.Amount;
+
+import static junit.framework.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AmountTest {
 
