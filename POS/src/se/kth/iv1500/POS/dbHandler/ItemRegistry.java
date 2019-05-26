@@ -26,9 +26,12 @@ public class ItemRegistry {
 	public ItemRegistry(){
 		addItem();
 	}
+
 	/**
 	 * checks if an item with the scanned identification is in the data base
-	 * @param itemIdentifier   the identification of an item 
+	 *
+	 * @param itemIdentifier   the identification of an item
+	 * @throws ItemNotFoundException when the item is not registred.
 	 * @return  an object of  <code >itemDTO</code> if there is an item with the same identification else <code>null</code>
 	 */
 	public ItemDTO findItem(String itemIdentifier) throws ItemNotFoundException {

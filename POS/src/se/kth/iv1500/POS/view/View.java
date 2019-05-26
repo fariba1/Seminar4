@@ -8,11 +8,37 @@ import se.kth.iv1500.POS.DTOs.*;
 
 public class View {
     private Controller contr;
-    private TotalRevenueView totalRevenueView = new TotalRevenueView();
+
+    private RevenueObserver observers = null;
+
+    int totalAmountPaid = 0;
+
+
+    public int getTotalAmountPaid() {
+        return totalAmountPaid;
+    }
+
+
+    public void addTotalAmountPaid(Amount change, Amount amountPaid) {
+        this.totalAmountPaid = this.totalAmountPaid + (amountPaid.getAmount() - change.getAmount());
+        notifyRevenueObserver();
+    }
+
+    public void attach(RevenueObserver observer){
+        observers = observer;
+    }
+
+    public void notifyRevenueObserver(){
+        observers.update();
+
+    }
+
+
 
     public View(Controller contr) {
         this.contr = contr;
-        new RevenueObserver(totalRevenueView);
+
+        observers=  new RevenueObserver(this);
     }
 
     /**
@@ -41,7 +67,7 @@ public class View {
 
         System.out.println("The pay has been handled. Change is equal to " + change);
 
-        totalRevenueView.addTotalAmountPaid(change, amountPaid);
+        this.addTotalAmountPaid(change, amountPaid);
 
 
         contr.startNewSale();
@@ -63,14 +89,7 @@ public class View {
 
         System.out.println("The pay has been handled. Change is equal to " + change2);
 
-        totalRevenueView.addTotalAmountPaid(change2, amountPaid2);
-
-
-
-
-
-
-
+        this.addTotalAmountPaid(change2, amountPaid2);
 
     }
 
@@ -81,19 +100,17 @@ public class View {
                     + contr.getItemSaleInfo().getRunningTotal().getAmount());
 
         } catch (ItemNotFoundException e) {
-            System.out.println("Item is not found.");
-
-            System.out.println("\\nlog-------Begin----");
-            e.printStackTrace();
-            System.out.println("\nlog-------End------\n");
-
+            loggErrors(e,"Item is not found.");
         } catch (ItemAlreadyAddedException e) {
-            System.out.println("Item is already in the basket.");
-
-            System.out.println("\\nlog-------Begin----");
-            e.printStackTrace();
-            System.out.println("\nlog-------End------\n");
-
+            loggErrors(e,"Item is already in the basket.");
         }
+    }
+
+    private void loggErrors(Exception e,String message) {
+        System.out.println(message);
+
+        System.out.println("\\nlog-------Begin----");
+        e.printStackTrace();
+        System.out.println("\nlog-------End------\n");
     }
 }

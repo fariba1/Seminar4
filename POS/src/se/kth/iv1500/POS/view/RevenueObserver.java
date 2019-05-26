@@ -1,15 +1,16 @@
 package se.kth.iv1500.POS.view;
 
-public class RevenueObserver {
+public class RevenueObserver implements Observer {
 
-    TotalRevenueView totalRevenueView;
+    View view;
 
-    public RevenueObserver(TotalRevenueView totalRevenueView){
-        this.totalRevenueView = totalRevenueView;
-        this.totalRevenueView.attach(this);
+    public RevenueObserver(View view){
+        this.view = view;
+        this.view.attach(this);
     }
 
+    @Override
     public void update() {
-        System.out.println("----Total amount Paid in system: "+totalRevenueView.totalAmountPaid);
+        System.out.println("----Total amount Paid in system: "+view.getTotalAmountPaid());
     }
 }
