@@ -23,7 +23,7 @@ public class Sale {
 	 * adds an new item to the current sale, updates the running total including the VAT
 	 * @param itemInfo an instance of <code>ItemDTO</code> that contains information about an item
 	 * @return an instance of <code>SaleDTO</code> that contains information about current sale
-	 * @throws ItemAlreadyAddedException 
+	 * @throws ItemAlreadyAddedException when the item is adready added to the basket
 	 */
 	public SaleDTO addItem(ItemDTO itemInfo) throws ItemAlreadyAddedException {
 		

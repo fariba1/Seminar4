@@ -1,44 +1,27 @@
 package se.kth.iv1500.POS.view;
 
-import se.kth.iv1500.POS.controller.*;
-import se.kth.iv1500.POS.model.*;
+import se.kth.iv1500.POS.controller.Controller;
+import se.kth.iv1500.POS.model.Amount;
+import se.kth.iv1500.POS.model.TotalAmountPaid;
 import se.kth.iv1500.POS.model.exceptions.ItemAlreadyAddedException;
 import se.kth.iv1500.POS.model.exceptions.ItemNotFoundException;
-import se.kth.iv1500.POS.DTOs.*;
 
 public class View {
     private Controller contr;
 
-    private RevenueObserver observers = null;
 
-    int totalAmountPaid = 0;
-
-
-    public int getTotalAmountPaid() {
-        return totalAmountPaid;
-    }
+    TotalAmountPaid totalAmountPaid = new TotalAmountPaid();
 
 
     public void addTotalAmountPaid(Amount change, Amount amountPaid) {
-        this.totalAmountPaid = this.totalAmountPaid + (amountPaid.getAmount() - change.getAmount());
-        notifyRevenueObserver();
+        this.totalAmountPaid.setAmount(
+                new Amount(totalAmountPaid.getAmount().getAmount() + (amountPaid.getAmount() - change.getAmount()), "kr"));
+        totalAmountPaid.notifyObservers();
     }
-
-    public void attach(RevenueObserver observer){
-        observers = observer;
-    }
-
-    public void notifyRevenueObserver(){
-        observers.update();
-
-    }
-
-
 
     public View(Controller contr) {
         this.contr = contr;
 
-        observers=  new RevenueObserver(this);
     }
 
     /**
@@ -100,13 +83,13 @@ public class View {
                     + contr.getItemSaleInfo().getRunningTotal().getAmount());
 
         } catch (ItemNotFoundException e) {
-            loggErrors(e,"Item is not found.");
+            loggErrors(e, "Item is not found.");
         } catch (ItemAlreadyAddedException e) {
-            loggErrors(e,"Item is already in the basket.");
+            loggErrors(e, "Item is already in the basket.");
         }
     }
 
-    private void loggErrors(Exception e,String message) {
+    private void loggErrors(Exception e, String message) {
         System.out.println(message);
 
         System.out.println("\\nlog-------Begin----");
