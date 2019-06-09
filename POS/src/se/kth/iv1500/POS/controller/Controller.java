@@ -35,13 +35,12 @@ public class Controller {
 	    /**
 	     * adds an item to the current sale
 	     * @param itemIdentifier   the identification of an item
-	     * @param itemQuantitiy     the number of items 
+	     * @param itemQuantity     the number of items
 	     * @return returns an object of type <code>SaleDTO</code>which contains information about the price of an item, VAT rate and running total 
-	     * @throws ItemNotFoundException 
-	     * @throws ItemAlreadyAddedException 
-	     * @throws Exception 
+	     * @throws ItemNotFoundException when the item is not registred.
+	     * @throws ItemAlreadyAddedException when the item is adready added to the basket
 	     */
-	    public SaleDTO addItem(String itemIdentifier, int itemQuantity) throws ItemNotFoundException, ItemAlreadyAddedException  {
+	    public SaleDTO addItem(String itemIdentifier, int itemQuantity) throws ItemNotFoundException, ItemAlreadyAddedException {
 	    	
 	    	ItemRegistry itemRegistry =  regCreator.getItemRegistry();
 	    	ItemDTO itemInfo = itemRegistry.findItem(itemIdentifier);
