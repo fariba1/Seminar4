@@ -1,5 +1,7 @@
 package se.kth.iv1500.POS.dbHandler;
-import se.kth.iv1500.POS.DTOs.*;
+
+import se.kth.iv1500.POS.DTOs.CustomerDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 

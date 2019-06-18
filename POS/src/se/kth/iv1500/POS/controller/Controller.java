@@ -24,7 +24,7 @@ public class Controller {
     private CashRegister cashRegister;
     private RegistryCreator regCreator;
 
-    private List<RevenueObserver> observers =  new ArrayList<>();
+    private List<RevenueObserver> observers = new ArrayList<>();
 
 
     /**

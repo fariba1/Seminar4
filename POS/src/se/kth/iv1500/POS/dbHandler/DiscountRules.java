@@ -1,5 +1,7 @@
 package se.kth.iv1500.POS.dbHandler;
-import se.kth.iv1500.POS.DTOs.*;
+
+import se.kth.iv1500.POS.DTOs.ItemDTO;
+import se.kth.iv1500.POS.DTOs.SaleDTO;
 import se.kth.iv1500.POS.model.Amount;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class DiscountRules {
     /**
      * Counts the sum of the available discounts for members
      * @param saleInfo holds the information of the sale
-     * @return returns the discount of the data-type double and contains the percentage for discount 
+     * @return §returns the discount of the data-type double and contains the percentage for discount
      */
     public double discountRateMember(SaleDTO saleInfo ){
         double discount = 0.0;

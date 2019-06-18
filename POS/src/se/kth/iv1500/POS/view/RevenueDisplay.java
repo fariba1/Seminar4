@@ -11,7 +11,7 @@ public class RevenueDisplay implements RevenueObserver {
     }
 
     @Override
-    public void addNewTotalAmount(Amount amount) {
+    public void addAdditionalAmountPaid(Amount amount) {
         addToTotal(amount);
         printCurrentState();
     }
