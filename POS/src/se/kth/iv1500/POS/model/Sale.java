@@ -2,6 +2,8 @@ package se.kth.iv1500.POS.model;
 import se.kth.iv1500.POS.DTOs.*;
 import se.kth.iv1500.POS.dbHandler.*;
 import se.kth.iv1500.POS.model.exceptions.ItemAlreadyAddedException;
+import se.kth.iv1500.POS.view.RevenueDisplay;
+import se.kth.iv1500.POS.view.RevenueObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,10 @@ public class Sale {
 	private Amount change;
 	private Amount totalPriceAfterDiscount = new Amount (0, "kr");
 	private SaleDTO saleInfo;
-	
+
+	private List<RevenueObserver> observers = new ArrayList<>();
+
+
 	/**
 	 * Creates an instance of sale
 	 */
@@ -110,6 +115,19 @@ public class Sale {
 	public void printReceipt(Printer printer) {
 		Receipt receipt = new Receipt(saleInfo);
 		printer.printReceipt(receipt);
+		notifyObservers();
+	}
+
+
+	private void notifyObservers() {
+		for (RevenueObserver obs : observers) {
+			obs.addNewTotalAmount(totalPriceAfterDiscount);
+		}
+	}
+
+
+	public void addObservers(List<RevenueObserver> revenueDisplays) {
+		observers.addAll(revenueDisplays);
 	}
 }
 	

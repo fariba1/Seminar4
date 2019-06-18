@@ -2,25 +2,15 @@ package se.kth.iv1500.POS.view;
 
 import se.kth.iv1500.POS.controller.Controller;
 import se.kth.iv1500.POS.model.Amount;
-import se.kth.iv1500.POS.model.TotalAmountPaid;
 import se.kth.iv1500.POS.model.exceptions.ItemAlreadyAddedException;
 import se.kth.iv1500.POS.model.exceptions.ItemNotFoundException;
 
 public class View {
     private Controller contr;
 
-
-    TotalAmountPaid totalAmountPaid = new TotalAmountPaid();
-
-
-    public void addTotalAmountPaid(Amount change, Amount amountPaid) {
-        this.totalAmountPaid.setAmount(
-                new Amount(totalAmountPaid.getAmount().getAmount() + (amountPaid.getAmount() - change.getAmount()), "kr"));
-        totalAmountPaid.notifyObservers();
-    }
-
     public View(Controller contr) {
         this.contr = contr;
+        contr.addRevenueObserver(new RevenueDisplay());
 
     }
 
@@ -50,9 +40,6 @@ public class View {
 
         System.out.println("The pay has been handled. Change is equal to " + change);
 
-        this.addTotalAmountPaid(change, amountPaid);
-
-
         contr.startNewSale();
         System.out.println("New sale was started.");
 
@@ -72,7 +59,6 @@ public class View {
 
         System.out.println("The pay has been handled. Change is equal to " + change2);
 
-        this.addTotalAmountPaid(change2, amountPaid2);
 
     }
 
