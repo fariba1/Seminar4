@@ -6,7 +6,6 @@ import se.kth.iv1500.POS.dbHandler.CustomerRegistry;
 import se.kth.iv1500.POS.dbHandler.DiscountRules;
 import se.kth.iv1500.POS.dbHandler.Printer;
 import se.kth.iv1500.POS.model.exceptions.ItemAlreadyAddedException;
-import se.kth.iv1500.POS.view.RevenueObserver;
 
 import java.util.ArrayList;
 import java.util.List;

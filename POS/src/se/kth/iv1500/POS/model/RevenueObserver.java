@@ -1,4 +1,4 @@
-package se.kth.iv1500.POS.view;
+package se.kth.iv1500.POS.model;
 
 import se.kth.iv1500.POS.model.Amount;
 

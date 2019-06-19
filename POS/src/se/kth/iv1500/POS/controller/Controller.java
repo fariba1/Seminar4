@@ -13,7 +13,7 @@ import se.kth.iv1500.POS.model.Sale;
 import se.kth.iv1500.POS.model.exceptions.ItemAlreadyAddedException;
 import se.kth.iv1500.POS.model.exceptions.ItemNotFoundException;
 import se.kth.iv1500.POS.view.RevenueDisplay;
-import se.kth.iv1500.POS.view.RevenueObserver;
+import se.kth.iv1500.POS.model.RevenueObserver;
 
 import java.util.ArrayList;
 import java.util.List;
